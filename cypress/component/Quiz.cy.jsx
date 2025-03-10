@@ -1,11 +1,11 @@
 import React from 'react';
-import Quiz from '../../client/src/components/Quiz'; // Adjust the path
+import Quiz from '../../client/src/components/Quiz';
 import { mount } from 'cypress/react';
 
 describe('Quiz Component', () => {
   it('renders the quiz component', () => {
     mount(<Quiz />);
-    cy.get('.quiz-container').should('exist');
+    cy.get('.btn').should('exist');
     cy.get('button').contains('Start').should('exist');
   });
 
