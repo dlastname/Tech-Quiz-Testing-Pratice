@@ -3,16 +3,23 @@ import Quiz from '../../client/src/components/Quiz';
 import { mount } from 'cypress/react';
 
 describe('Quiz Component', () => {
-  it('renders the quiz component', () => {
-    mount(<Quiz />);
-    cy.get('.btn').should('exist');
-    cy.get('button').contains('Start').should('exist');
-  });
+  beforeEach(() => {
+    cy.intercept({
+        method: 'GET',
+        url: '/api/questions/random'
+      },
+      {
+        fixture: 'questions.json',
+        statusCode: 200
+      }
+      ).as('getRandomQuestion')
+    });
 
-  it('starts the quiz when the start button is clicked', () => {
+  it('shourld start the quiz when the start button is pressed', () => {
     mount(<Quiz />);
-    cy.get('button').contains('Start').click();
-    cy.get('.question').should('exist');
+    cy.get('button').contains('Start Quiz').click();
+    cy.get('[data-cy="question"]').should('be.visible');
+    cy.get('h2').should('not.be.empty');
   });
 
   it('allows answering a question and moving to the next question', () => {
@@ -27,20 +34,18 @@ describe('Quiz Component', () => {
     mount(<Quiz />);
     cy.get('button').contains('Start').click();
     for (let i = 0; i < 10; i++) {
-      cy.get('input[type="radio"]').first().click();
-      cy.get('button').contains('Next').click();
+      cy.get('button').contains('1').click();
     }
-    cy.get('.score').should('exist');
+    cy.get('.alert-success').should('exist');
   });
 
-  it('restarts the quiz when the "Start New Quiz" button is clicked', () => {
+  it('restarts the quiz when the "New Quiz" button is clicked', () => {
     mount(<Quiz />);
     cy.get('button').contains('Start').click();
     for (let i = 0; i < 10; i++) {
-      cy.get('input[type="radio"]').first().click();
-      cy.get('button').contains('Next').click();
+      cy.get('button').contains('1').click();
     }
-    cy.get('button').contains('Start New Quiz').click();
+    cy.get('button').contains('Take New Quiz').click();
     cy.get('.question').should('exist');
   });
 });
