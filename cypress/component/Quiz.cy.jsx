@@ -16,19 +16,18 @@ describe("Quiz Component", () => {
     ).as("getRandomQuestion");
   });
 
-  it("shourld start the quiz when the start button is pressed", () => {
+  it("should start the quiz when the start button is pressed", () => {
     mount(<Quiz />);
     cy.get("button").contains("Start Quiz").click();
     cy.get('[data-cy="question"]').should("be.visible");
     cy.get("h2").should("not.be.empty");
   });
 
-  it("allows answering a question and moving to the next question", () => {
+  it("should answer the quiz questions", () => {
     mount(<Quiz />);
     cy.get("button").contains("Start").click();
-    cy.get('input[type="radio"]').first().click();
-    cy.get("button").contains("Next").click();
-    cy.get(".question").should("exist");
+    cy.get("button").contains("1").click();
+    cy.get(".alert-success").should("exist");
   });
 
   it("completes the quiz and displays the score", () => {
@@ -36,6 +35,7 @@ describe("Quiz Component", () => {
     cy.get("button").contains("Start").click();
     cy.get("button").contains("1").click();
     cy.get(".alert-success").should("exist");
+    cy.get(".alert-success").should("be.visible").and("contain", "Your score");
   });
 
   it('restarts the quiz when the "New Quiz" button is clicked', () => {
@@ -43,6 +43,6 @@ describe("Quiz Component", () => {
     cy.get("button").contains("Start").click();
     cy.get("button").contains("1").click();
     cy.get("button").contains("Take New Quiz").click();
-    cy.get(".question").should("exist");
+    cy.get('[data-cy="question"]').should("be.visible");
   });
 });
