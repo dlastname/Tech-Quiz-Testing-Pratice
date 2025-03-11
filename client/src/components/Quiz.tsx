@@ -81,7 +81,7 @@ const Quiz = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div className='card p-4'>
+    <div className='card p-4' data-cy="question">
       <h2>{currentQuestion.question}</h2>
       <div className="mt-3">
       {currentQuestion.answers.map((answer, index) => (
