@@ -60,7 +60,7 @@ This will install all required packages, including Cypress for testing.
 
 For a demonstration of the testing process, watch the walkthrough video:
 
-[![Watch the Walkthrough](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://drive.google.com/file/d/YOUR_VIDEO_ID/view?usp=sharing)
+[![Watch the Walkthrough](https://img.youtube.com/vi/YOUR_VIDEO_ID/0.jpg)](https://drive.google.com/file/d/1mJcpfPPuuCNUcThciHrkiRuODGzwbYgl/view?usp=sharing)
 
 ---
 
